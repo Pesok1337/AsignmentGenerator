@@ -4,7 +4,8 @@ namespace TaskManagementAPI.Models
 {
     public class ProductGroup
     {
-        public Guid ProductGroupId { get; set; }
-        public string Name { get; set; }
+        public int ProductGroupId { get; set; }
+        public required string Name { get; set; }
+        public Guid ProductGroupKey { get; set; }
     }
 }

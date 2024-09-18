@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TaskManagementAPI.models;
 using TaskManagementAPI.Models;
 namespace TaskManagementAPI.Data
 {
@@ -6,28 +7,32 @@ namespace TaskManagementAPI.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Models.Task> Tasks { get; set; }
         public DbSet<ProductGroup> ProductGroups { get; set; }
-        public DbSet<ControlPoint> ControlPoints { get; set; }
-        public DbSet<TaskLog> TaskLogs { get; set; }
+        public DbSet<DigitalSet> DigitalSets { get; set; }
+        public DbSet<DigitalSetValue> DigitalSetValues { get; set; }
+        public DbSet<OrgUnit> OrgUnits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.Task>()
-                .Property(t => t.TaskId)
-                .HasDefaultValueSql("gen_random_uuid()");
-
-            modelBuilder.Entity<TaskLog>()
-                .Property(t => t.LogId)
-                .HasDefaultValueSql("gen_random_uuid()");
+            // Настройка для работы с существующими таблицами без миграций
+            modelBuilder.Entity<ProductGroup>().ToTable("ProductGroup");
+            modelBuilder.Entity<DigitalSet>().ToTable("DigitalSet");
+            modelBuilder.Entity<DigitalSetValue>().ToTable("DigitalSetValue");
+            modelBuilder.Entity<OrgUnit>().ToTable("OrgUnit");
 
             modelBuilder.Entity<ProductGroup>()
-                .Property(p => p.ProductGroupId)
-                .HasDefaultValueSql("gen_random_uuid()");
+            .HasKey(pg => pg.ProductGroupId); // Указываем первичный ключ
 
-            modelBuilder.Entity<ControlPoint>()
-                .Property(c => c.ControlPointId)
-                .HasDefaultValueSql("gen_random_uuid()");
+            modelBuilder.Entity<DigitalSet>()
+            .HasKey(ds => ds.DigitalSetId); // Указываем первичный ключ
+
+            modelBuilder.Entity<DigitalSetValue>()
+            .HasKey(dsv => dsv.DigitalSetValueId); // Указываем первичный ключ
+
+            modelBuilder.Entity<OrgUnit>()
+            .HasKey(ou => ou.OrgUnitId); // Указываем первичный ключ
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

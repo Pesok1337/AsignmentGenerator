@@ -21,7 +21,7 @@ namespace TaskManagementAPI
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddHostedService<TaskGenerationService>();
+            //builder.Services.AddHostedService<TaskGenerationService>();
 
             var app = builder.Build();
 
