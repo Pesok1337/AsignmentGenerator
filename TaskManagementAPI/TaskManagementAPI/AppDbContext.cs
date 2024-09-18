@@ -11,6 +11,7 @@ namespace TaskManagementAPI.Data
         public DbSet<DigitalSet> DigitalSets { get; set; }
         public DbSet<DigitalSetValue> DigitalSetValues { get; set; }
         public DbSet<OrgUnit> OrgUnits { get; set; }
+        public DbSet<EventFreq> EventFreqs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,7 @@ namespace TaskManagementAPI.Data
             modelBuilder.Entity<DigitalSet>().ToTable("DigitalSet");
             modelBuilder.Entity<DigitalSetValue>().ToTable("DigitalSetValue");
             modelBuilder.Entity<OrgUnit>().ToTable("OrgUnit");
+            modelBuilder.Entity<EventFreq>().ToTable("EventFreq");
 
             modelBuilder.Entity<ProductGroup>()
             .HasKey(pg => pg.ProductGroupId); // ”казываем первичный ключ
@@ -31,6 +33,8 @@ namespace TaskManagementAPI.Data
 
             modelBuilder.Entity<OrgUnit>()
             .HasKey(ou => ou.OrgUnitId); // ”казываем первичный ключ
+            modelBuilder.Entity<EventFreq>()
+           .HasKey(ef => ef.EventFreqUid); // ”казываем первичный ключ
 
             base.OnModelCreating(modelBuilder);
         }
