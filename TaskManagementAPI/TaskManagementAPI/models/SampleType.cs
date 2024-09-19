@@ -1,10 +1,9 @@
 ﻿namespace TaskManagementAPI.models
 {
-    public class DigitalSetValue
+    public class SampleType
     {
         public int DigitalSetValueId { get; set; }
-        public int DigitalSetId { get; set; }
-        public string Value { get; set; }
+        public string Name { get; set; }
         public Guid DigitalSetValueUid { get; set; }
     }
 }

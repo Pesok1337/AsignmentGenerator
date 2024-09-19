@@ -19,6 +19,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { ProductControlComponent } from './product-control/product-control.component';
 import { ControlTaskComponent } from './control-schdule-table/control-schdule-table.component';
@@ -47,7 +48,8 @@ import { ControlTaskDialogComponent } from './control-task-dialog/control-task-d
     MatRadioModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

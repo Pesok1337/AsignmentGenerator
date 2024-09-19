@@ -1,66 +1,76 @@
-<h1 mat-dialog-title>{{ data.isEdit ? 'Изменить запись' : 'Добавить запись' }}</h1>
-<div mat-dialog-content>
-  <form [formGroup]="controlTaskForm" novalidate>
-    <mat-form-field>
+<h2 mat-dialog-title>{{ data.isEdit ? 'Изменить' : 'Добавить' }} график контроля</h2>
+<mat-dialog-content>
+  <form [formGroup]="form" class="form-container">
+    <mat-form-field appearance="fill">
       <mat-label>Вид контроля</mat-label>
       <mat-select formControlName="controlType">
-        <mat-option *ngFor="let type of controlTypes" [value]="type.name">{{ type.name }}</mat-option>
+        <mat-option *ngFor="let type of controlTypes" [value]="type.value">
+          {{type.value}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Тип пробы</mat-label>
-      <input matInput formControlName="sampleType" placeholder="Введите тип пробы" />
+      <mat-select>
+        <mat-option *ngFor="let sample of sampleTypes" [value]="sample.value">
+          {{sample.value}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Цех</mat-label>
       <mat-select formControlName="orgUnit">
-        <mat-option *ngFor="let unit of orgUnits" [value]="unit.name">{{ unit.name }}</mat-option>
+        <mat-option *ngFor="let unit of orgUnits" [value]="unit.name">
+          {{unit.name}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Группа объектов контроля</mat-label>
       <mat-select formControlName="productGroup">
-        <mat-option *ngFor="let group of productGroups" [value]="group.name">{{ group.name }}</mat-option>
+        <mat-option *ngFor="let group of productGroups" [value]="group.name">
+          {{group.name}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Частота генерации</mat-label>
       <mat-select formControlName="taskFreq">
-        <mat-option *ngFor="let freq of taskFreqs" [value]="freq.frequency">{{ freq.frequency }}</mat-option>
+        <mat-option *ngFor="let freq of taskFreqs" [value]="freq.name">
+          {{freq.name}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Дата начала</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="startDate" />
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Дата окончания</mat-label>
-      <input matInput [matDatepicker]="picker2" formControlName="endDate" />
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-checkbox formControlName="isActive">Активность</mat-checkbox>
-    </mat-form-field>
+    <mat-checkbox formControlName="isActive">Активность</mat-checkbox>
 
-    <mat-form-field>
-      <mat-label>Примечание</mat-label>
-      <textarea matInput formControlName="description" placeholder="Введите примечание"></textarea>
-    </mat-form-field>
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field> -->
   </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Отмена</button>
-  <button mat-button [mat-dialog-close]="controlTaskForm.value" [disabled]="controlTaskForm.invalid">
-    {{ data.isEdit ? 'Изменить' : 'Добавить' }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
+    {{ data.isEdit ? 'Сохранить' : 'Добавить' }}
   </button>
-</div>
+</mat-dialog-actions>

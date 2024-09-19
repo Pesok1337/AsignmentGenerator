@@ -2,9 +2,7 @@
   <div>
     <button mat-button (click)="openAddDialog()">Добавить</button>
     <button mat-button [disabled]="!selectedRecord" (click)="openEditDialog()">Изменить</button>
-
-    <button mat-button (click)="editRecord()">Изменить</button>
-    <button mat-button (click)="deleteRecord()">Удалить</button>
+    <button mat-button [disabled]="!selectedRecord" (click)="deleteRecord()">Удалить</button>
   </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

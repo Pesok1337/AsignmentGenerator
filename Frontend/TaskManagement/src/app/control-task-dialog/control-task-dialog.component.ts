@@ -5,19 +5,21 @@ import { ControlTaskService } from '../services/control-task.service';
 import { ProductGroup } from '../models/product-group.model';
 import { ControlType } from '../models/control-type.model';
 import { OrgUnit } from '../models/org-unit.model';
-import { TaskFreq } from '../models/task-freq.model';
+import { EventFreq } from '../models/event-freq.model';
+import { SampleType } from '../models/sample-type.model';
 
 @Component({
   selector: 'app-control-task-dialog',
   templateUrl: './control-task-dialog.component.html',
-  styleUrls: ['./control-task-dialog.component.scss'],
+  styleUrls: ['./control-task-dialog.component.scss']
 })
 export class ControlTaskDialogComponent implements OnInit {
-  controlTaskForm: FormGroup;
+  form: FormGroup;
   controlTypes: ControlType[] = [];
   orgUnits: OrgUnit[] = [];
   productGroups: ProductGroup[] = [];
-  taskFreqs: TaskFreq[] = [];
+  taskFreqs: EventFreq[] = [];
+  sampleTypes: SampleType[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -25,58 +27,53 @@ export class ControlTaskDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private controlTaskService: ControlTaskService
   ) {
-    this.controlTaskForm = this.fb.group({
+    this.form = this.fb.group({
       controlType: ['', Validators.required],
       sampleType: ['', Validators.required],
       orgUnit: ['', Validators.required],
       productGroup: ['', Validators.required],
       taskFreq: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
       isActive: [false],
       description: ['']
     });
   }
 
   ngOnInit(): void {
-    this.controlTaskService.getControlTypes().subscribe({
-      next: (types) => {
-        this.controlTypes = types;
-      },
-      error: (err) => {
-        console.error('Error fetching control types', err);
-      }
-    });
-  
-    this.controlTaskService.getOrgUnits().subscribe({
-      next: (units) => {
-        this.orgUnits = units;
-      },
-      error: (err) => {
-        console.error('Error fetching org units', err);
-      }
-    });
-  
-    this.controlTaskService.getProductGroups().subscribe({
-      next: (groups) => {
-        this.productGroups = groups;
-      },
-      error: (err) => {
-        console.error('Error fetching product groups', err);
-      }
-    });
-  
-    this.controlTaskService.getTaskFreqs().subscribe({
-      next: (freqs) => {
-        this.taskFreqs = freqs;
-      },
-      error: (err) => {
-        console.error('Error fetching task frequencies', err);
-      }
-    });
-  
+    this.loadData();
     if (this.data.isEdit) {
-      this.controlTaskForm.patchValue(this.data.record);
+      this.form.patchValue(this.data.record);
+    }
+  }
+
+  loadData(): void {
+    this.controlTaskService.getControlTypes().subscribe(
+      types => this.controlTypes = types,
+      error => console.error('Error loading control types', error)
+    );
+    this.controlTaskService.getOrgUnits().subscribe(
+      units => this.orgUnits = units,
+      error => console.error('Error loading org units', error)
+    );
+    this.controlTaskService.getProductGroups().subscribe(
+      groups => this.productGroups = groups,
+      error => console.error('Error loading product groups', error)
+    );
+    this.controlTaskService.getTaskFreqs().subscribe(
+      freqs => this.taskFreqs = freqs,
+      error => console.error('Error loading task frequencies', error)
+    );
+    this.controlTaskService.getSampleTypes().subscribe(
+      sampleTypes => this.sampleTypes = sampleTypes,
+      error => console.error('Error loading task frequencies', error)
+    );
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      
+      this.dialogRef.close(this.form.value);
     }
   }
 
