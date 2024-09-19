@@ -4,6 +4,7 @@ import { ProductGroup } from "./product-group.model";
 import { TaskFreq } from "./task-freq.model";
 
 export interface ControlTaskRecord {
+    id: number;
     controlType: ControlType;
     sampleType: string; // Пока оставим как строку
     orgUnit: OrgUnit;

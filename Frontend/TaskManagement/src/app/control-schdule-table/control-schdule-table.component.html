@@ -1,6 +1,8 @@
   <!-- Buttons -->
   <div>
-    <button mat-button (click)="addRecord()">Добавить</button>
+    <button mat-button (click)="openAddDialog()">Добавить</button>
+    <button mat-button [disabled]="!selectedRecord" (click)="openEditDialog()">Изменить</button>
+
     <button mat-button (click)="editRecord()">Изменить</button>
     <button mat-button (click)="deleteRecord()">Удалить</button>
   </div>

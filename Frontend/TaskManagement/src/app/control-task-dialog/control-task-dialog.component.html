@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>{{ data.isEdit ? 'Изменить запись' : 'Добавить запись' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="controlTaskForm" novalidate>
+    <mat-form-field>
+      <mat-label>Вид контроля</mat-label>
+      <ng-container matFormFieldControl>
+        <mat-select formControlName="controlType">
+          <mat-option *ngFor="let type of controlTypes" [value]="type.name">{{ type.name }}</mat-option>
+        </mat-select>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Тип пробы</mat-label>
+      <input matInput formControlName="sampleType" placeholder="Введите тип пробы" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Цех</mat-label>
+      <mat-select formControlName="orgUnit">
+        <mat-option *ngFor="let unit of orgUnits" [value]="unit.name">{{ unit.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Группа объектов контроля</mat-label>
+      <mat-select formControlName="productGroup">
+        <mat-option *ngFor="let group of productGroups" [value]="group.name">{{ group.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Частота генерации</mat-label>
+      <mat-select formControlName="taskFreq">
+        <mat-option *ngFor="let freq of taskFreqs" [value]="freq.frequency">{{ freq.frequency }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Дата начала</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="startDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Дата окончания</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="endDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-checkbox formControlName="isActive" matNativeControl>Активность</mat-checkbox>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Примечание</mat-label>
+      <textarea matInput formControlName="description" placeholder="Введите примечание"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Отмена</button>
+  <button mat-button [mat-dialog-close]="controlTaskForm.value" [disabled]="controlTaskForm.invalid">
+    {{ data.isEdit ? 'Изменить' : 'Добавить' }}
+  </button>
+</div>
