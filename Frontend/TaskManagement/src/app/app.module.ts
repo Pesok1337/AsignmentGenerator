@@ -7,9 +7,8 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { TaskListComponent } from './task-list/task-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+// Removed provideAnimationsAsync to check if this causes the issue
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,8 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule } from '@angular/material/dialog'
-import { MatDatepickerModule  } from '@angular/material/datepicker'
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { ProductControlComponent } from './product-control/product-control.component';
@@ -26,26 +25,31 @@ import { ControlTaskComponent } from './control-schdule-table/control-schdule-ta
 import { ControlTaskDialogComponent } from './control-task-dialog/control-task-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, TaskCreationComponent, TaskListComponent, ProductControlComponent, ControlTaskComponent, ControlTaskDialogComponent],
+  declarations: [
+    AppComponent,
+    TaskCreationComponent,
+    TaskListComponent,
+    ProductControlComponent,
+    ControlTaskComponent,
+    ControlTaskDialogComponent
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,  // Add this
-    MatSelectModule,     // Add this
-    MatInputModule,      // Add this
-    MatButtonModule,     // Add this
-    MatTableModule ,
+    BrowserAnimationsModule,   // Standard animations module
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
     MatRadioModule,
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
