@@ -1,15 +1,29 @@
   <!-- Buttons -->
   <div>
     <button mat-button (click)="openAddDialog()">Добавить</button>
-    <button mat-button [disabled]="!selectedRecord" (click)="openEditDialog()">Изменить</button>
-    <button mat-button [disabled]="!selectedRecord" (click)="deleteRecord()">Удалить</button>
+    <button mat-button [disabled]="selection.selected.length !== 1" (click)="openEditDialog()">Изменить</button>
+    <button mat-button [disabled]="selection.selected.length === 0" (click)="deleteRecord()">Удалить</button>
   </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
     <!-- Control Type Column -->
     <ng-container matColumnDef="controlType">
       <th mat-header-cell *matHeaderCellDef> Вид контроля </th>
-      <td mat-cell *matCellDef="let element"> {{ element.controlType.name }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.controlType }} </td>
     </ng-container>
   
     <!-- Sample Type Column -->
@@ -21,38 +35,38 @@
     <!-- Org Unit Column -->
     <ng-container matColumnDef="orgUnit">
       <th mat-header-cell *matHeaderCellDef> Цех </th>
-      <td mat-cell *matCellDef="let element"> {{ element.orgUnit.name }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.orgUnit }} </td>
     </ng-container>
   
     <!-- Product Group Column -->
     <ng-container matColumnDef="productGroup">
       <th mat-header-cell *matHeaderCellDef> Группа объектов контроля </th>
-      <td mat-cell *matCellDef="let element"> {{ element.productGroup.name }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.productGroup }} </td>
     </ng-container>
   
     <!-- Task Frequency Column -->
-    <ng-container matColumnDef="taskFreq">
+    <ng-container matColumnDef="eventFreq">
       <th mat-header-cell *matHeaderCellDef> Частота генерации </th>
-      <td mat-cell *matCellDef="let element"> {{ element.taskFreq.frequency }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.eventFreq }} </td>
     </ng-container>
   
     <!-- Start Date Column -->
     <ng-container matColumnDef="startDate">
       <th mat-header-cell *matHeaderCellDef> Дата начала </th>
-      <td mat-cell *matCellDef="let element"> {{ element.startDate | date }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.startDate }} </td>
     </ng-container>
   
     <!-- End Date Column -->
     <ng-container matColumnDef="endDate">
       <th mat-header-cell *matHeaderCellDef> Дата окончания </th>
-      <td mat-cell *matCellDef="let element"> {{ element.endDate | date }} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.endDate }} </td>
     </ng-container>
   
     <!-- Activity Column -->
     <ng-container matColumnDef="isActive">
       <th mat-header-cell *matHeaderCellDef> Активность </th>
       <td mat-cell *matCellDef="let element">
-        <mat-radio-button [checked]="element.isActive"></mat-radio-button>
+        <mat-checkbox [disabled]="true"[checked]="element.isActive"></mat-checkbox>
       </td>
     </ng-container>
   

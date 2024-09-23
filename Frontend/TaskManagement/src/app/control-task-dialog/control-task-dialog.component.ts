@@ -7,6 +7,7 @@ import { ControlType } from '../models/control-type.model';
 import { OrgUnit } from '../models/org-unit.model';
 import { EventFreq } from '../models/event-freq.model';
 import { SampleType } from '../models/sample-type.model';
+import { ControlTaskRecord } from '../models/control-task-record.model';
 
 @Component({
   selector: 'app-control-task-dialog',
@@ -18,7 +19,7 @@ export class ControlTaskDialogComponent implements OnInit {
   controlTypes: ControlType[] = [];
   orgUnits: OrgUnit[] = [];
   productGroups: ProductGroup[] = [];
-  taskFreqs: EventFreq[] = [];
+  eventFreqs: EventFreq[] = [];
   sampleTypes: SampleType[] = [];
 
   constructor(
@@ -29,12 +30,12 @@ export class ControlTaskDialogComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       controlType: ['', Validators.required],
-      sampleType: ['', Validators.required],
-      orgUnit: ['', Validators.required],
-      productGroup: ['', Validators.required],
-      taskFreq: ['', Validators.required],
-      startDate: [null, Validators.required],
-      endDate: [null, Validators.required],
+      sampleType: [''],
+      orgUnit: [''],
+      productGroup: [''],
+      eventFreq: [''],
+      startDate: [null],
+      endDate: [null],
       isActive: [false],
       description: ['']
     });
@@ -45,9 +46,11 @@ export class ControlTaskDialogComponent implements OnInit {
     if (this.data.isEdit) {
       this.form.patchValue(this.data.record);
     }
+    console.log('Form status:', this.form.status);
   }
 
   loadData(): void {
+    console.log('loadData called');
     this.controlTaskService.getControlTypes().subscribe(
       types => this.controlTypes = types,
       error => console.error('Error loading control types', error)
@@ -60,8 +63,8 @@ export class ControlTaskDialogComponent implements OnInit {
       groups => this.productGroups = groups,
       error => console.error('Error loading product groups', error)
     );
-    this.controlTaskService.getTaskFreqs().subscribe(
-      freqs => this.taskFreqs = freqs,
+    this.controlTaskService.getEventFreqs().subscribe(
+      freqs => this.eventFreqs = freqs,
       error => console.error('Error loading task frequencies', error)
     );
     this.controlTaskService.getSampleTypes().subscribe(
@@ -69,11 +72,29 @@ export class ControlTaskDialogComponent implements OnInit {
       error => console.error('Error loading task frequencies', error)
     );
   }
-
+  onEventFreqChange(event: any): void {
+    const selectedFreq = this.eventFreqs.find(freq => freq.name === event.value);
+    if (selectedFreq) {
+      this.form.patchValue({ description: selectedFreq.description });
+    }
+  }
   onSubmit(): void {
     if (this.form.valid) {
       
-      this.dialogRef.close(this.form.value);
+      const newRecord: ControlTaskRecord = this.form.value;
+      // newRecord.description = 
+      console.log('newRecord', newRecord);
+      this.controlTaskService.addControllSchedule(newRecord).subscribe(
+        response => {
+          console.log('Record added successfully', response);
+          this.dialogRef.close(response);
+        },
+        error => {
+          console.error('Error adding record', error);
+        }
+      );
+    } else {
+      console.log('Form is invalid');
     }
   }
 

@@ -1,8 +1,8 @@
 .mat-dialog-content
 {
     width: 80%;
-    margin-bottom: 15px;
-    margin-right: 20px;
+    margin-bottom: 5px;
+    margin-right: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -10,8 +10,8 @@
 .mat-form-field
 {
     width: 80%;
-    margin-bottom: 15px;
-    margin-right: 20px;
+    margin-bottom: 5px;
+    margin-right: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -19,6 +19,6 @@
 .form-container {
     display: flex;
     flex-direction: column;
-    gap: 16px; /* Добавляет отступы между элементами */
+    //gap: 4px; /* Добавляет отступы между элементами */
   }
   

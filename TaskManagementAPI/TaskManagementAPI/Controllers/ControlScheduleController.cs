@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using TaskManagementAPI.Data;
 using TaskManagementAPI.models;
 
@@ -95,6 +96,21 @@ namespace TaskManagementAPI.Controllers
             return NoContent();
         }
 
+        [HttpPost("deleteList")]
+        public async Task<IActionResult> DeleteControlTasks([FromBody] List<Guid> ids)
+        {
+            var controlTasks = _context.ControlSchedules.Where(ct => ids.Contains(ct.ControlScheduleUid)).ToList();
+
+            if (controlTasks == null || controlTasks.Count == 0)
+            {
+                return NotFound(new { message = "No records found to delete" });
+            }
+
+            _context.ControlSchedules.RemoveRange(controlTasks);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Records deleted successfully" });
+        }
         private bool ControlScheduleExists(Guid id)
         {
             return _context.ControlSchedules.Any(e => e.ControlScheduleUid == id);

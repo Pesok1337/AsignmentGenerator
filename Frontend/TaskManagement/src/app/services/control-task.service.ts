@@ -28,17 +28,29 @@ export class ControlTaskService {
     return this.http.get<OrgUnit[]>(`${this.baseUrl}/OrgUnit`);
   }
 
-  getTaskFreqs(): Observable<EventFreq[]> {
+  getEventFreqs(): Observable<EventFreq[]> {
     return this.http.get<EventFreq[]>(`${this.baseUrl}/EventFreq`);
   }
   getSampleTypes(): Observable<SampleType[]> {
     return this.http.get<SampleType[]>(`${this.baseUrl}/SampleType`);
   }
-  addControlTask(record: ControlTaskRecord): Observable<any> {
-    return this.http.post(`${this.baseUrl}/ControlTask`, record); // Поменяй URL на реальный
+  addControllSchedule(record: ControlTaskRecord): Observable<any> {
+    return this.http.post(`${this.baseUrl}/ControlSchedule`, record); // Поменяй URL на реальный
   }
 
-  updateControlTask(record: ControlTaskRecord): Observable<any> {
-    return this.http.put(`${this.baseUrl}/ControlTask/${record.id}`, record); // Заменяй на актуальный URL
+  updateControllSchedule(record: ControlTaskRecord): Observable<any> {
+    return this.http.put(`${this.baseUrl}/ControlSchedule/${record.controlScheduleUid}`, record); // Заменяй на актуальный URL
+  }
+
+  getAllControllSchedules(): Observable<ControlTaskRecord[]>
+  {
+    return this.http.get<ControlTaskRecord[]>(`${this.baseUrl}/ControlSchedule`); // Поменяй URL на реальный
+  }
+
+  deleteControllSchedule(controlScheduleUid: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/ControlSchedule/${controlScheduleUid}`);
+  }
+  deleteControllSchedules(ids: string[]): Observable<void> {
+    return this.http.post<void>(`${this.baseUrl}/ControlSchedule/deleteList`, ids);
   }
 }

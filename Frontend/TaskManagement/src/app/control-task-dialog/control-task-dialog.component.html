@@ -12,7 +12,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Тип пробы</mat-label>
-      <mat-select>
+      <mat-select formControlName="sampleType">
         <mat-option *ngFor="let sample of sampleTypes" [value]="sample.value">
           {{sample.value}}
         </mat-option>
@@ -39,8 +39,8 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Частота генерации</mat-label>
-      <mat-select formControlName="taskFreq">
-        <mat-option *ngFor="let freq of taskFreqs" [value]="freq.name">
+      <mat-select formControlName="eventFreq" (selectionChange)="onEventFreqChange($event)">
+        <mat-option *ngFor="let freq of eventFreqs" [value]="freq.name">
           {{freq.name}}
         </mat-option>
       </mat-select>
@@ -69,8 +69,8 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
+  <button mat-button (click)="onCancel()">Отмена</button>
+   <button mat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid">
     {{ data.isEdit ? 'Сохранить' : 'Добавить' }}
   </button>
 </mat-dialog-actions>
