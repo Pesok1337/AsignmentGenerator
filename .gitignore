@@ -171,3 +171,6 @@ DataAccessService.config
 /tools/Indusoft.LDS.Installer/Indusoft.LDS.Installer/packages
 /Source/WixSetup/I-LDS-NETF-WEBAPI/HeatFile.wxsnode_modules/
 /Frontend/TaskManagement/node_modules/
+/Frontend/node_modules/
+/Frontend/TaskManagement/.angular/
+/Frontend/TaskManagement/.vscode/
