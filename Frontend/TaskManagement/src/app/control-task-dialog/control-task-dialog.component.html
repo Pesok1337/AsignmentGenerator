@@ -46,9 +46,17 @@
       </mat-select>
     </mat-form-field>
 
+    <!-- <mat-form-field appearance="fill">
+      <mat-label>Дата начала</mat-label>
+      <input matInput [ngxMatDatetimePicker]="startPicker" formControlName="startDate">
+      <ngx-mat-datetime-picker-toggle matSuffix [for]="startPicker"></ngx-mat-datetime-picker-toggle>
+      <ngx-mat-datetime-picker #startPicker></ngx-mat-datetime-picker>
+    </mat-form-field> -->
+
+
     <mat-form-field appearance="fill">
       <mat-label>Дата начала</mat-label>
-      <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+      <input matInput [matDatepicker]="startPicker" formControlName="startPicker">
       <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>

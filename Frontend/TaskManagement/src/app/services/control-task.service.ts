@@ -12,7 +12,7 @@ import { SampleType } from '../models/sample-type.model';
   providedIn: 'root'
 })
 export class ControlTaskService {
-  private baseUrl = 'http://localhost:5087/api'; // Задай URL бэкенда
+  private baseUrl = 'http://localhost:5087/api'; 
 
   constructor(private http: HttpClient) {}
 
@@ -35,16 +35,16 @@ export class ControlTaskService {
     return this.http.get<SampleType[]>(`${this.baseUrl}/SampleType`);
   }
   addControllSchedule(record: ControlTaskRecord): Observable<any> {
-    return this.http.post(`${this.baseUrl}/ControlSchedule`, record); // Поменяй URL на реальный
+    return this.http.post(`${this.baseUrl}/ControlSchedule`, record); 
   }
 
   updateControllSchedule(record: ControlTaskRecord): Observable<any> {
-    return this.http.put(`${this.baseUrl}/ControlSchedule/${record.controlScheduleUid}`, record); // Заменяй на актуальный URL
+    return this.http.put(`${this.baseUrl}/ControlSchedule/${record.controlScheduleUid}`, record); 
   }
 
   getAllControllSchedules(): Observable<ControlTaskRecord[]>
   {
-    return this.http.get<ControlTaskRecord[]>(`${this.baseUrl}/ControlSchedule`); // Поменяй URL на реальный
+    return this.http.get<ControlTaskRecord[]>(`${this.baseUrl}/ControlSchedule`); 
   }
 
   deleteControllSchedule(controlScheduleUid: string): Observable<any> {

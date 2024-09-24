@@ -21,6 +21,7 @@ export class ControlTaskDialogComponent implements OnInit {
   productGroups: ProductGroup[] = [];
   eventFreqs: EventFreq[] = [];
   sampleTypes: SampleType[] = [];
+  myDatePicker: any;
 
   constructor(
     private fb: FormBuilder,
