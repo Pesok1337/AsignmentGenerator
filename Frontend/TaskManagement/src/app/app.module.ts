@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { TaskCreationComponent } from './task-creation/task-creation.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { TaskListComponent } from './task-list/task-list.component';
 import { HttpClientModule } from '@angular/common/http';
-// Removed provideAnimationsAsync to check if this causes the issue
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,16 +18,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
-import { ProductControlComponent } from './product-control/product-control.component';
 import { ControlTaskComponent } from './control-schdule-table/control-schdule-table.component';
 import { ControlTaskDialogComponent } from './control-task-dialog/control-task-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskCreationComponent,
-    TaskListComponent,
-    ProductControlComponent,
     ControlTaskComponent,
     ControlTaskDialogComponent
   ],
@@ -39,7 +32,7 @@ import { ControlTaskDialogComponent } from './control-task-dialog/control-task-d
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    BrowserAnimationsModule,   // Standard animations module
+    BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
