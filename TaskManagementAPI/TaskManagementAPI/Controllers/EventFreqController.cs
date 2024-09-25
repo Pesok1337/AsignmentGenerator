@@ -19,7 +19,9 @@ namespace TaskManagementAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetEventFreqs()
         {
-            var eventFreqs = await _context.EventFreqs.ToListAsync();
+            var eventFreqs = await _context.EventFreqs
+                .Where(ef => ef.Name != null)
+                .ToListAsync();
 
             return Ok(eventFreqs);
         }

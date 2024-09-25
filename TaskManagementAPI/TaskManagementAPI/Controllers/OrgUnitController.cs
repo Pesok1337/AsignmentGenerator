@@ -20,7 +20,9 @@ namespace TaskManagementAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrgUnit>>> GetOrgUnits()
         {
-            var orgUnits = await _context.OrgUnits.ToListAsync();
+            var orgUnits = await _context.OrgUnits
+                .Where(ou => ou.OrgUnitLevelId == 8)
+                .ToListAsync();
             return Ok(orgUnits);
         }
     }

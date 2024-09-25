@@ -31,14 +31,14 @@ export class ControlTaskDialogComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       controlType: ['', Validators.required],
-      sampleType: [''],
-      orgUnit: [''],
-      productGroup: [''],
-      eventFreq: [''],
-      startDate: [null],
-      endDate: [null],
-      isActive: [false],
-      description: ['']
+      sampleType: ['', Validators.required],
+      orgUnit: ['', Validators.required],
+      productGroup: ['', Validators.required],
+      eventFreq: ['', Validators.required],
+      startDate: [null, Validators.required],
+      endDate: [null, Validators.required],
+      isActive: [false, Validators.required],
+      description: ['', Validators.required]
     });
   }
 

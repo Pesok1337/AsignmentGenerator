@@ -49,7 +49,9 @@ export class ControlTaskComponent implements OnInit {
   openAddDialog(): void {
     console.log('openAddDialog called'); // Добавьте это отладочное сообщение
   const dialogRef = this.dialog.open(ControlTaskDialogComponent, {
-    width: '80%',
+    //width: '80%',
+    width: '600px',
+    height: '800px',
     data: { isEdit: false }
     });
     dialogRef.afterClosed().subscribe(result => {

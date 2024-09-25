@@ -1,0 +1,17 @@
+SELECT
+aief."Start",
+aief."Stop",
+aief."OccurrenceCount",
+aief."Description",
+"AcsItem"."IsActive",
+"TaskRuleEventFreq"."GenerationDate"
+
+
+FROM 
+"STCPTT" 
+--"AcsItemEventFreq"
+join "AcsItem" on "AcsItem"."STCPTTUid" = "STCPTT"."STCPTTUid"
+join "TaskRule" on "AcsItem"."AcsItemUid" = "TaskRule"."TaskContentUid"
+join "AcsItemEventFreq" as aief on aief."AcsItemUid"="AcsItem"."AcsItemUid"
+join "EventFreq" as ef on ef."EventFreqUid"=aief."EventFreqUid"
+join "TaskRuleEventFreq" on "TaskRuleEventFreq"."EventFreqUid" = aief."EventFreqUid"
