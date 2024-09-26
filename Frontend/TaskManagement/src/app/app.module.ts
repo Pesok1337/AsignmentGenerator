@@ -19,16 +19,22 @@ import { MatTabsModule  } from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
-import { ControlTaskComponent } from './control-schdule-table/control-schdule-table.component';
+import { ControlTaskComponent } from './control-schedule-table/control-schedule-table.component';
 import { ControlTaskDialogComponent } from './control-task-dialog/control-task-dialog.component';
 import { FrequencyTabComponent } from './frequency-tab/frequency-tab.component';
+import  {AssignmentPageComponent} from "./assignment-page/assignment-page.component";
+import {AssignmentTableComponent} from "./assignment-table/assignment-table.component";
+import  {AssignmentDialogComponent} from "./assignment-dialog/assignment-dialog.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlTaskComponent,
     ControlTaskDialogComponent,
-    FrequencyTabComponent
+    FrequencyTabComponent,
+    AssignmentPageComponent,
+    AssignmentTableComponent,
+    AssignmentDialogComponent
   ],
   imports: [
     BrowserModule,

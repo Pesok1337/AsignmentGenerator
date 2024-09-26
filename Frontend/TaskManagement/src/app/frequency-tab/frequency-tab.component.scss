@@ -1,0 +1,38 @@
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.table-section {
+  display: flex;
+}
+
+table {
+  flex: 1;
+}
+
+.table-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.repeat-template {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

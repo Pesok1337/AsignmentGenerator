@@ -11,8 +11,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-control-task',
-  templateUrl: './control-schdule-table.component.html',
-  styleUrls: ['./control-schdule-table.component.scss']
+  templateUrl: './control-schedule-table.component.html',
+  styleUrls: ['./control-schedule-table.component.scss']
 })
 export class ControlTaskComponent implements OnInit {
   selectedRecord: ControlTaskRecord | null = null;
@@ -20,16 +20,16 @@ export class ControlTaskComponent implements OnInit {
   displayedColumns: string[] = ['select', 'controlType', 'sampleType', 'orgUnit', 'productGroup', 'eventFreq', 'startDate', 'endDate', 'isActive', 'description'];
   selection = new SelectionModel<ControlTaskRecord>(true, []);
   constructor(private fb: FormBuilder, private dialog: MatDialog, private controlTaskService: ControlTaskService) {}
- 
+
   ngOnInit(): void {
-    this.loadControllSchdeules(); 
+    this.loadControllSchedules();
   }
   deleteRecord() {
     const selectedIds = this.selection.selected.map(record => record.controlScheduleUid);
     selectedIds.forEach(controlScheduleUid => {console.log("id: ",controlScheduleUid)});
   this.controlTaskService.deleteControllSchedules(selectedIds).subscribe(
     () => {
-      this.loadControllSchdeules(); // Reload the table after deletion
+      this.loadControllSchedules(); // Reload the table after deletion
       this.selection.clear(); // Clear the selection
     },
     error => console.error('Error deleting control schedules', error)
@@ -42,7 +42,7 @@ export class ControlTaskComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadControllSchdeules();
+        this.loadControllSchedules();
       }
     });
   }
@@ -50,16 +50,18 @@ export class ControlTaskComponent implements OnInit {
     console.log('openAddDialog called'); // Добавьте это отладочное сообщение
   const dialogRef = this.dialog.open(ControlTaskDialogComponent, {
     //width: '80%',
-    width: '600px',
+    width: '1200px',
     height: '800px',
+    maxWidth: '80vw',  // максимальная ширина в процентах от экрана
+    maxHeight: '80vh', // максимальная высота
     data: { isEdit: false }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('Диалоговое окно закрыто', result);
-      this.loadControllSchdeules();
+      this.loadControllSchedules();
     });
   }
-  loadControllSchdeules(): void {
+  loadControllSchedules(): void {
     this.controlTaskService.getAllControllSchedules().subscribe(
       (controllSchedules: ControlTaskRecord[]) => {
         this.dataSource = new MatTableDataSource<ControlTaskRecord>(controllSchedules);  // Ensure this is an array
@@ -80,7 +82,7 @@ export class ControlTaskComponent implements OnInit {
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
-  
+
 
 
 
@@ -91,7 +93,7 @@ export class ControlTaskComponent implements OnInit {
   //     width: '1200px',
   //     data: { isEdit: true, record: record }
   //   });
-  
+
   //   dialogRef.afterClosed().subscribe(result => {
   //     if (result) {
   //       this.updateRecord(result);
@@ -104,14 +106,14 @@ export class ControlTaskComponent implements OnInit {
   //     width: '1200px',
   //     data: { isEdit: true, record: record }
   //   });
-  
+
   //   dialogRef.afterClosed().subscribe(result => {
   //     if (result) {
   //       this.updateRecord(result);
   //     }
   //   });
   // }
-  
+
   // // Define the updateRecord() method
   // updateRecord(updatedRecord: ControlTaskRecord): void {
   //   // Call your service to update the record in the backend

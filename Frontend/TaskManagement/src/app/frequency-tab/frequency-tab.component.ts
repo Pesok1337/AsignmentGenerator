@@ -1,62 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-frequency-tab',
   templateUrl: './frequency-tab.component.html',
   styleUrls: ['./frequency-tab.component.scss']
 })
-export class FrequencyTabComponent implements OnInit {
-  frequencyForm!: FormGroup;
-  schedules = [
-    { name: 'Схема контроля качества', id: 1 },
-    { name: 'Производственный контроль', id: 2 }
-  ];
-  controlPoints = [
-    { name: 'ДСФ-4. Технологический', id: 1 },
-    { name: 'ДСФ-5. Контрольный', id: 2 }
-  ];
+export class FrequencyTabComponent {
+  displayedColumns: string[] = ['startDate', 'frequency'];
+  dataSource = [];
+
+  frequencyTabForm: FormGroup;
+  descriptions = ['Описание 1', 'Описание 2', 'Описание 3'];
 
   constructor(private fb: FormBuilder) {
-    this.frequencyForm = this.fb.group({
-      indicatorType: ['current', Validators.required],
-      controlSchedule: ['', Validators.required],
-      controlPoint: ['', Validators.required],
-      description: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      isActive: [true]
+    this.frequencyTabForm = this.fb.group({
+      description: [''],
+      name: [''],
+      startDate: [null],
+      repeatPeriod: ['none'],
+      repeatTemplate: this.fb.group({
+        templateType: ['hourly'],  // Ежечасно по умолчанию
+        hourlyInterval: [1]
+      })
+    });
+
+    // Слушаем изменение периода повторений
+    this.frequencyTabForm.get('repeatPeriod')!.valueChanges.subscribe(value => {
+      if (value === 'none') {
+        this.frequencyTabForm.get('repeatTemplate')!.disable();
+      } else {
+        this.frequencyTabForm.get('repeatTemplate')!.enable();
+      }
     });
   }
 
-  ngOnInit(): void {
-    this.frequencyForm = this.fb.group({
-      indicatorType: ['current', Validators.required],
-      controlSchedule: ['', Validators.required],
-      controlPoint: ['', Validators.required],
-      description: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
-      isActive: [true]
-    });
+  addRow() {
+    // Логика для добавления новой строки в таблицу
   }
 
-  onScheduleSelect(event: MatSelectChange): void {
-    const selectedSchedule = event.value;
-    if (selectedSchedule.name === 'Схема контроля качества') {
-      this.frequencyForm.patchValue({
-        controlPoint: this.controlPoints[0].name,
-        description: 'раз в час'
-      });
-    }
+  copyRow() {
+    // Логика для копирования строки
   }
 
-  onSave(): void {
-    if (this.frequencyForm.valid) {
-      const formData = this.frequencyForm.value;
-      // Логика отправки данных в БД через сервис
-      console.log('Form Data:', formData);
-    }
+  deleteRow() {
+    // Логика для удаления строки
   }
 }
