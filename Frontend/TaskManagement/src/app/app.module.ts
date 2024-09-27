@@ -26,6 +26,8 @@ import  {AssignmentPageComponent} from "./assignment-page/assignment-page.compon
 import {AssignmentTableComponent} from "./assignment-table/assignment-table.component";
 import  {AssignmentDialogComponent} from "./assignment-dialog/assignment-dialog.component";
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,7 @@ import  {AssignmentDialogComponent} from "./assignment-dialog/assignment-dialog.
     FrequencyTabComponent,
     AssignmentPageComponent,
     AssignmentTableComponent,
-    AssignmentDialogComponent
+    AssignmentDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +56,12 @@ import  {AssignmentDialogComponent} from "./assignment-dialog/assignment-dialog.
     MatNativeDateModule,
     MatCheckboxModule,
     MatTabsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
-  //schemas: [NO_ERRORS_SCHEMA],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
+

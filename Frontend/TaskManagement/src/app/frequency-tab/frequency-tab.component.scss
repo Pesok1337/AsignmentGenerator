@@ -1,38 +1,73 @@
+// .container {
+//   width: 80%;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+//   padding: 20px;
+// }
+
+// .table-section {
+//   display: flex;
+// }
+
+// table {
+//   flex: 1;
+// }
+
+// .table-buttons {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+//   margin-left: 20px;
+// }
+
+// .form-section {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
+
+// .full-width {
+//   width: 100%;
+// }
+
+// .repeat-template {
+//   display: flex;
+//   align-items: center;
+//   gap: 20px;
+// }
+
 .container {
-  width: 80%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 20px; /* Пространство между элементами */
 }
 
 .table-section {
   display: flex;
-}
-
-table {
-  flex: 1;
+  flex-direction: column;
+  width: 100%;
 }
 
 .table-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: 20px;
+  justify-content: flex-end; /* Кнопки справа */
+  gap: 10px; /* Расстояние между кнопками */
+}
+
+.full-width {
+  width: 100%; /* Чтобы элементы формы растягивались на всю ширину */
 }
 
 .form-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.full-width {
-  width: 100%;
+  gap: 20px;
 }
 
 .repeat-template {
   display: flex;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
 }
+

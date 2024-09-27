@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import moment from 'moment';
+import 'moment/locale/ru';
+
+moment.locale('ru');
 
 @Component({
   selector: 'app-frequency-tab',
@@ -12,7 +16,8 @@ export class FrequencyTabComponent {
 
   frequencyTabForm: FormGroup;
   descriptions = ['Описание 1', 'Описание 2', 'Описание 3'];
-
+  selectedDate: Date = new Date();  // Инициализация текущей датой
+  
   constructor(private fb: FormBuilder) {
     this.frequencyTabForm = this.fb.group({
       description: [''],
@@ -46,4 +51,21 @@ export class FrequencyTabComponent {
   deleteRow() {
     // Логика для удаления строки
   }
-}
+
+  
+
+// Пример функции отправки данных на бэкенд
+  // submitData() {
+  //   const formData = this.frequencyTabForm.value;
+  //   const formattedDateTime = moment(formData.startDate).format('YYYY-MM-DDTHH:mm:ss');
+
+  //   const dataToSend = {
+  //     ...formData,
+  //     startDate: formattedDateTime
+  //   };
+
+    // Отправка данных на бэкенд
+    // this.yourService.sendData(dataToSend).subscribe(response => {
+    //   // Обработка ответа
+    // });
+  }
