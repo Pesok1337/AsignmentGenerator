@@ -13,7 +13,8 @@ moment.locale('ru');
 export class FrequencyTabComponent {
   displayedColumns: string[] = ['startDate', 'frequency'];
   dataSource = [];
-
+  datetime24h: Date | null = null;
+  ruLocale: any;
   frequencyTabForm: FormGroup;
   descriptions = ['Описание 1', 'Описание 2', 'Описание 3'];
   selectedDate: Date = new Date();  // Инициализация текущей датой

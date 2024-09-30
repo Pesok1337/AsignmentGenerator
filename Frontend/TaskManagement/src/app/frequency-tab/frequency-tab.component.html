@@ -45,11 +45,19 @@
   <input matInput [owlDateTime]="datetimePicker" placeholder="Выберите дату и время" [(ngModel)]="selectedDate" [owlDateTimeTrigger]="datetimePicker">
   <owl-date-time #datetimePicker></owl-date-time>
 </mat-form-field> -->
-<label>
+<!-- <label>
   Date Time:
   <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
   <owl-date-time #dt></owl-date-time>
-</label>
+</label> -->
+<p-calendar 
+    inputId="calendar-24h" 
+    [(ngModel)]="datetime24h" 
+    [showTime]="true" 
+    [showButtonBar]="true"
+    hourFormat="24"
+    [touchUI]="true" 
+    />
 
     <!-- Период повторений -->
     <mat-form-field appearance="fill" class="full-width">
