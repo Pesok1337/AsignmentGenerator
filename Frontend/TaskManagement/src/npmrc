@@ -1,0 +1,4 @@
+@indusoft:registry=http://nuget-server.indusoft.ru:8081/repository/Indusoft.Npm.Repository/
+email=ilia.peshchanov@indusoft.ru
+always-auth=true
+_auth=[basic_token]

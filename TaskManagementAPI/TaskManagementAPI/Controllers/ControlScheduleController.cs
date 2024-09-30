@@ -20,14 +20,14 @@ namespace TaskManagementAPI.Controllers
 
         // GET: api/ControlSchedule
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ControlSchedule>>> GetControlSchedules()
+        public async Task<ActionResult<IEnumerable<_ControlSchedule>>> GetControlSchedules()
         {
             return await _context.ControlSchedules.ToListAsync();
         }
 
         // GET: api/ControlSchedule/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<ControlSchedule>> GetControlSchedule(Guid id)
+        public async Task<ActionResult<_ControlSchedule>> GetControlSchedule(Guid id)
         {
             var controlSchedule = await _context.ControlSchedules.FindAsync(id);
 
@@ -41,7 +41,7 @@ namespace TaskManagementAPI.Controllers
 
         // POST: api/ControlSchedule
         [HttpPost]
-        public async Task<ActionResult<ControlSchedule>> CreateControlSchedule(ControlSchedule controlSchedule)
+        public async Task<ActionResult<_ControlSchedule>> CreateControlSchedule(_ControlSchedule controlSchedule)
         {
             controlSchedule.ControlScheduleUid = Guid.NewGuid();
             _context.ControlSchedules.Add(controlSchedule);
@@ -52,7 +52,7 @@ namespace TaskManagementAPI.Controllers
 
         // PUT: api/ControlSchedule/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateControlSchedule(Guid id, ControlSchedule controlSchedule)
+        public async Task<IActionResult> UpdateControlSchedule(Guid id, _ControlSchedule controlSchedule)
         {
             if (id != controlSchedule.ControlScheduleUid)
             {

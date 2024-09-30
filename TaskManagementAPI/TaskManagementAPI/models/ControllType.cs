@@ -1,8 +1,8 @@
 ﻿namespace TaskManagementAPI.models
 {
-    public class SampleType
+    public class ControllType
     {
-        public int SampleTypeId { get; set; }
+        public int ControllTypeId { get; set; }
         public string Name { get; set; }
     }
 }

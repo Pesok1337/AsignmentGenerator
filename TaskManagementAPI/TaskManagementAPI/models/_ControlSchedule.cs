@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace TaskManagementAPI.models
 {
     [Table("ControlSchedule", Schema = "customer")]
-    public class ControlSchedule
+    public class _ControlSchedule
     {
         [Key]
         public Guid ControlScheduleUid { get; set; }

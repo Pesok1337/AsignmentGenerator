@@ -12,7 +12,7 @@ namespace TaskManagementAPI.Data
         public DbSet<DigitalSetValue> DigitalSetValues { get; set; }
         public DbSet<OrgUnit> OrgUnits { get; set; }
         public DbSet<EventFreq> EventFreqs { get; set; }
-        public DbSet<ControlSchedule> ControlSchedules { get; set; }
+        public DbSet<_ControlSchedule> ControlSchedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,7 @@ namespace TaskManagementAPI.Data
             modelBuilder.Entity<DigitalSetValue>().ToTable("DigitalSetValue");
             modelBuilder.Entity<OrgUnit>().ToTable("OrgUnit");
             modelBuilder.Entity<EventFreq>().ToTable("EventFreq");
-            modelBuilder.Entity<ControlSchedule>().ToTable("ControlSchedule", "customer");
+            modelBuilder.Entity<_ControlSchedule>().ToTable("ControlSchedule", "customer");
             //modelBuilder.Entity<SampleType>().ToTable("DigitalSetValue");
 
             modelBuilder.Entity<ProductGroup>()
@@ -38,7 +38,7 @@ namespace TaskManagementAPI.Data
             .HasKey(ou => ou.OrgUnitId); // ”казываем первичный ключ
             modelBuilder.Entity<EventFreq>()
            .HasKey(ef => ef.EventFreqUid); 
-            modelBuilder.Entity<ControlSchedule>()
+            modelBuilder.Entity<_ControlSchedule>()
           .HasKey(cs => cs.ControlScheduleUid);
 
             base.OnModelCreating(modelBuilder);
