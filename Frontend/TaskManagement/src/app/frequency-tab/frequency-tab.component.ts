@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import moment from 'moment';
+// import moment from 'moment';
 import 'moment/locale/ru';
 
-moment.locale('ru');
+// moment.locale('ru');
 
 @Component({
   selector: 'app-frequency-tab',

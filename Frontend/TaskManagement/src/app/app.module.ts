@@ -58,8 +58,7 @@ import { PrimeNGConfig } from 'primeng/api';
     MatNativeDateModule,
     MatCheckboxModule,
     MatTabsModule,
-    CalendarModule,
-    PrimeNGConfig
+    CalendarModule
     // OwlDateTimeModule,
     // OwlNativeDateTimeModule
   ],
@@ -68,8 +67,11 @@ import { PrimeNGConfig } from 'primeng/api';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private primengConfig: PrimeNGConfig) {
-    // Вызов настройки локализации при старте приложения
+  constructor(private primengConfig: PrimeNGConfig) { // Внедрение PrimeNGConfig через конструктор
+    this.configurePrimeNG();
+  }
+
+  configurePrimeNG() {
     this.primengConfig.setTranslation({
       firstDayOfWeek: 1,
       dayNames: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
