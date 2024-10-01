@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using TaskManagementAPI.Data;
+using TaskManagementAPI.interfaces;
 using TaskManagementAPI.Services;
 
 namespace TaskManagementAPI
@@ -22,6 +23,7 @@ namespace TaskManagementAPI
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             //builder.Services.AddHostedService<TaskGenerationService>();
+            builder.Services.AddScoped<ICustomEventFreqService, CustomEventFreqService>();
 
             var app = builder.Build();
 

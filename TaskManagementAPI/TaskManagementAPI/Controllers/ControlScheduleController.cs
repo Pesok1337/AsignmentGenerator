@@ -9,27 +9,27 @@ namespace TaskManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ControlScheduleController : ControllerBase
+    public class ControllScheduleController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public ControlScheduleController(AppDbContext context)
+        public ControllScheduleController(AppDbContext context)
         {
             _context = context;
         }
 
         // GET: api/ControlSchedule
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<_ControlSchedule>>> GetControlSchedules()
+        public async Task<ActionResult<IEnumerable<ControllSchedule>>> GetControlSchedules()
         {
-            return await _context.ControlSchedules.ToListAsync();
+            return await _context.ControllSchedules.ToListAsync();
         }
 
         // GET: api/ControlSchedule/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<_ControlSchedule>> GetControlSchedule(Guid id)
+        public async Task<ActionResult<ControllSchedule>> GetControlSchedule(Guid id)
         {
-            var controlSchedule = await _context.ControlSchedules.FindAsync(id);
+            var controlSchedule = await _context.ControllSchedules.FindAsync(id);
 
             if (controlSchedule == null)
             {
@@ -41,20 +41,20 @@ namespace TaskManagementAPI.Controllers
 
         // POST: api/ControlSchedule
         [HttpPost]
-        public async Task<ActionResult<_ControlSchedule>> CreateControlSchedule(_ControlSchedule controlSchedule)
+        public async Task<ActionResult<ControllSchedule>> CreateControlSchedule(ControllSchedule controllSchedule)
         {
-            controlSchedule.ControlScheduleUid = Guid.NewGuid();
-            _context.ControlSchedules.Add(controlSchedule);
+            controllSchedule.ControllScheduleUid = Guid.NewGuid();
+            _context.ControllSchedules.Add(controllSchedule);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetControlSchedule), new { id = controlSchedule.ControlScheduleUid }, controlSchedule);
+            return CreatedAtAction(nameof(GetControlSchedule), new { id = controllSchedule.ControllScheduleUid }, controllSchedule);
         }
 
         // PUT: api/ControlSchedule/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateControlSchedule(Guid id, _ControlSchedule controlSchedule)
+        public async Task<IActionResult> UpdateControlSchedule(Guid id, ControllSchedule controlSchedule)
         {
-            if (id != controlSchedule.ControlScheduleUid)
+            if (id != controlSchedule.ControllScheduleUid)
             {
                 return BadRequest();
             }
@@ -84,13 +84,13 @@ namespace TaskManagementAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteControlSchedule(Guid id)
         {
-            var controlSchedule = await _context.ControlSchedules.FindAsync(id);
+            var controlSchedule = await _context.ControllSchedules.FindAsync(id);
             if (controlSchedule == null)
             {
                 return NotFound();
             }
 
-            _context.ControlSchedules.Remove(controlSchedule);
+            _context.ControllSchedules.Remove(controlSchedule);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -99,21 +99,21 @@ namespace TaskManagementAPI.Controllers
         [HttpPost("deleteList")]
         public async Task<IActionResult> DeleteControlTasks([FromBody] List<Guid> ids)
         {
-            var controlTasks = _context.ControlSchedules.Where(ct => ids.Contains(ct.ControlScheduleUid)).ToList();
+            var controlTasks = _context.ControllSchedules.Where(ct => ids.Contains(ct.ControllScheduleUid)).ToList();
 
             if (controlTasks == null || controlTasks.Count == 0)
             {
                 return NotFound(new { message = "No records found to delete" });
             }
 
-            _context.ControlSchedules.RemoveRange(controlTasks);
+            _context.ControllSchedules.RemoveRange(controlTasks);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "Records deleted successfully" });
         }
         private bool ControlScheduleExists(Guid id)
         {
-            return _context.ControlSchedules.Any(e => e.ControlScheduleUid == id);
+            return _context.ControllSchedules.Any(e => e.ControllScheduleUid == id);
         }
     }
 }

@@ -12,7 +12,10 @@ namespace TaskManagementAPI.Data
         public DbSet<DigitalSetValue> DigitalSetValues { get; set; }
         public DbSet<OrgUnit> OrgUnits { get; set; }
         public DbSet<EventFreq> EventFreqs { get; set; }
-        public DbSet<_ControlSchedule> ControlSchedules { get; set; }
+        public DbSet<CustomEventFreq> CustomEventFreqs { get; set; }
+        public DbSet<CSItem> CSItems { get; set; }
+        public DbSet<CSPart> CSParts { get; set; }
+        public DbSet<ControllSchedule> ControllSchedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,7 +25,7 @@ namespace TaskManagementAPI.Data
             modelBuilder.Entity<DigitalSetValue>().ToTable("DigitalSetValue");
             modelBuilder.Entity<OrgUnit>().ToTable("OrgUnit");
             modelBuilder.Entity<EventFreq>().ToTable("EventFreq");
-            modelBuilder.Entity<_ControlSchedule>().ToTable("ControlSchedule", "customer");
+            modelBuilder.Entity<ControllSchedule>().ToTable("ControlSchedule", "customer");
             //modelBuilder.Entity<SampleType>().ToTable("DigitalSetValue");
 
             modelBuilder.Entity<ProductGroup>()
@@ -37,9 +40,9 @@ namespace TaskManagementAPI.Data
             modelBuilder.Entity<OrgUnit>()
             .HasKey(ou => ou.OrgUnitId); // ”казываем первичный ключ
             modelBuilder.Entity<EventFreq>()
-           .HasKey(ef => ef.EventFreqUid); 
-            modelBuilder.Entity<_ControlSchedule>()
-          .HasKey(cs => cs.ControlScheduleUid);
+           .HasKey(ef => ef.EventFreqUid);
+            modelBuilder.Entity<ControllSchedule>()
+          .HasKey(cs => cs.ControllScheduleUid);
 
             base.OnModelCreating(modelBuilder);
         }

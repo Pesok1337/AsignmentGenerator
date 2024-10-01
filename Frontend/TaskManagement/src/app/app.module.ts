@@ -26,9 +26,13 @@ import  {AssignmentPageComponent} from "./assignment-page/assignment-page.compon
 import {AssignmentTableComponent} from "./assignment-table/assignment-table.component";
 import  {AssignmentDialogComponent} from "./assignment-dialog/assignment-dialog.component";
 
-// import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker'; 
+// import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { CalendarModule } from 'primeng/calendar';
 import { PrimeNGConfig } from 'primeng/api';
+import {FloatLabelModule} from "primeng/floatlabel";
+import {TableModule} from "primeng/table";
+import {DropdownModule} from "primeng/dropdown";
+import {RadioButtonModule} from "primeng/radiobutton";
 
 @NgModule({
   declarations: [
@@ -58,7 +62,11 @@ import { PrimeNGConfig } from 'primeng/api';
     MatNativeDateModule,
     MatCheckboxModule,
     MatTabsModule,
-    CalendarModule
+    CalendarModule,
+    FloatLabelModule,
+    TableModule,
+    DropdownModule,
+    RadioButtonModule,
     // OwlDateTimeModule,
     // OwlNativeDateTimeModule
   ],
